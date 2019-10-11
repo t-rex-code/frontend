@@ -111,3 +111,9 @@ export default function* rootSaga() {
   return yield all([]);
 }
 ```
+
+## Configurar styled component
+
+```
+yarn add styled-components
+```
