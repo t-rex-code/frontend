@@ -63,3 +63,51 @@ Crie o arquivo jsconfig.json na raiz para poder usar o control e acessar o pacot
   }
 }
 ```
+
+## Configurar o Redux
+
+src/store/index.js
+
+```
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducer from './ducks';
+import rootSaga from './sagas';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares = [sagaMiddleware];
+
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(rootSaga);
+
+export default store;
+
+```
+
+## Configurar Reducers
+
+src/store/ducks/index.js
+
+```
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+  test: () => [],
+});
+
+```
+
+## Configurar o Saga
+
+src/store/sagas/index.js
+
+```
+import { all } from 'redux-saga/effects';
+
+export default function* rootSaga() {
+  return yield all([]);
+}
+```
