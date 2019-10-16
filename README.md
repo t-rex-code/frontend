@@ -1,6 +1,77 @@
 ## Iniciar projeto
 
 ```
+  yarn eslint --init
+
+```
+
+Escolha as melhores opções
+se não quizer npm, digite no e yarn depois para instalar
+
+Configure o .prettierrc ma raiz
+
+```
+  "singleQuote": true,
+  "trailingComma" "es5"
+```
+
+configure o .eslintrc.json
+
+```
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "globals": {
+    "use": "readonly",
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parseOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    "no-param-reassign": "off"
+  }
+}
+
+```
+
+## Instalar a integração
+
+```
+  yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+```
+
+## conserte projeto em andamento
+
+ele avisa as variaveis que não estão sendo usadas
+
+```
+ yarn eslint --fix app --ext .js
+ yarn eslint --fix test app --ext .js
+ yarn eslint --fix start app --ext .js
+ yarn eslint --fix database app --ext .js // migrations
+ yarn eslint --fix config app --ext .js
+```
+
+## configurar os commits do vscode
+
+Na barra lateral, você pode clicar no verde, clicar no + no canto direito. Isso serve quando você meche muito no arquivo e quer dividir os commit.
+
+```
   yarn create react-app frontend
   yarn start
 ```
@@ -178,4 +249,47 @@ const App = () => (
 );
 
 export default App;
+```
+
+## Todo
+
+- Style guides;
+- Validações;
+- Configurar o debugger
+
+## Console.log
+
+1. Se retornar objeto, salve em {},
+2. Salve o retorno de uma função em uma variavel ou objeto
+3. Console.log se usa em uma ou duas verificações, mais que isso use o debugger do vscode
+4. Se o retorno da função for um status code, salve em uma variavel const response e use o metodo response.assertStatus(204);
+   exemplo: const response = await cliente.post('/reset').send({token, passwors: '123456', password_confirmation: '123456'}).end()
+
+response.assertStatus(204);
+
+5. Se usa o console.log para testar o retorno da data, o formato dela
+   exemplo: const dataWithSub = format(subHours(new Date(), 5), 'YYYY-MM-dd HH:ii:ss' );
+   console.log(dateWithSub) // vai mostrar que Y deve ser minusculo
+6. Consultar se ele vem em formato string ou date
+   console.log(userToken.created_at) // retorna string
+   ai você pode usar o parseiSO que transforma uma string em uma data
+
+- Configurar o debugger
+
+  Clica no bug, Clicar no play(no configuration) e escoha a opção add configuration.
+  Launch Program, criara uma pasta na raiz .vscode/launch.json, no arquivo você insere o path dele onde quer iniciar a aplicação, no nosso caso src/index.js
+
+```
+// Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/src/index.js"
+    }
+  ]
+}
 ```

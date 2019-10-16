@@ -18,11 +18,11 @@ class SignIn extends Component {
     password: '',
   };
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     const { email, password } = this.state;
@@ -38,9 +38,13 @@ class SignIn extends Component {
       <Container>
         <SignForm onSubmit={this.handleSubmit}>
           <h1>Boas vindas</h1>
-          console.log(this.handleSubmit())
           <span>E-MAIL</span>
-          <input type="email" name="email" value={email} onChange={this.handleInputChange} />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleInputChange}
+          />
           <span>SENHA</span>
           <input
             type="password"
@@ -57,9 +61,10 @@ class SignIn extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(AuthActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(AuthActions, dispatch);
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(SignIn);
